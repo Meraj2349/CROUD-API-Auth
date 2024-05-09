@@ -9,7 +9,7 @@ import { authenticateToken } from "./middlewere.js";
 dotenv.config();
 const app = express();
 app.use(express.json());
-
+console.log(getUsers());
 app.post("/register", async (req, res) => {
   var hashedPassword = await bcrypt.hashSync(req.body.password, 10);
   const { name } = req.body;
@@ -45,6 +45,6 @@ app.get("/profile", authenticateToken, async (req, res) => {
 
 app.use("/", router);
 
-app.listen(3000, () => {
-  console.log("Server is running at port 3000");
+app.listen(3001, () => {
+  console.log("Server is running at port 3001");
 });

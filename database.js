@@ -1,4 +1,4 @@
-import mysql from 'mysql'
+import mysql from 'mysql2'
 import dotenv from 'dotenv'
 dotenv.config()
 const pool = mysql.createPool({
@@ -7,7 +7,7 @@ const pool = mysql.createPool({
     password: process.env.MYSQL_PASSWORD,
     port: process.env.MYSQL_PORT,
     database: process.env.MYSQL_DATABASE
-});
+}).promise();
 export async function getTasks(id) {
     const [rows] = await pool.query('SELECT id, title, status FROM tasks WHERE user_id = ?', [id]);
     return rows;
